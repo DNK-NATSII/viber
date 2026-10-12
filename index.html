@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Відкрити Viber</title>
+<style>
+  body { font: 16px/1.5 -apple-system, system-ui, sans-serif; margin: 0; padding: 40px 16px; text-align: center; background: #fff; color: #222; }
+  a.btn { display: inline-block; margin-top: 16px; padding: 12px 24px; border-radius: 10px; background: #7360f2; color: #fff; text-decoration: none; }
+  @media (prefers-color-scheme: dark) { body { background: #111; color: #eee; } }
+</style>
+</head>
+<body>
+<p id="msg">Відкриваю Viber…</p>
+<a class="btn" id="go" href="#" hidden>Відкрити чат у Viber</a>
+<script>
+  // Перекидка для кнопки «Viber» у сповіщеннях ДНК Нації: Telegram не робить посилання viber:// клікабельним.
+  // Номер — лише після # (наприклад …/viber/#380671234567): ця частина адреси на сервер не надсилається.
+  var d = (location.hash || "").replace(/\D/g, "");
+  if (d.length === 10 && d[0] === "0") d = "38" + d;
+  if (d.length >= 10 && d.length <= 15) {
+    var url = "viber://chat?number=%2B" + d;
+    var go = document.getElementById("go");
+    go.href = url; go.hidden = false;
+    document.getElementById("msg").textContent = "Якщо Viber не відкрився сам — натисніть кнопку:";
+    location.replace(url);
+  } else {
+    document.getElementById("msg").textContent = "У посиланні немає номера телефону.";
+  }
+</script>
+</body>
+</html>
